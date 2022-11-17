@@ -15,8 +15,7 @@ const handleChange = ({target}) => {
 const handleSubmit = (event) => {
   event.preventDefault();
   createRecipe(formData);
-  setFormData(initialForm);
-}
+  setFormData(initialForm);}
   // TODO: When the form is submitted, a new recipe should be created, and the form contents cleared.
   // TODO: Add the required input and textarea form elements.
   // TODO: Add the required submit and change handlers
