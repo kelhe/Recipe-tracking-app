@@ -1,26 +1,27 @@
 import React, { useState } from "react";
 
 function RecipeCreate({createRecipe}) {
-const initialForm = {
-  name: "",
-  cuisine: "",
-  photo: "",
-  ingredients:"",
-  preparation:"",
-}
-const [formData,setFormData] = useState(initialForm)
-const handleChange = ({target}) => {
-  setFormData({...formData,[target.name] : target.value})
-}
-const handleSubmit = (event) => {
-  event.preventDefault();
-  createRecipe(formData);
-  setFormData(initialForm);
-}
+   //initial Form Data for the recipeCreate form
+   const initialForm = {
+    name: "",
+    cuisine: "",
+    photo: "",
+    ingredients: "",
+    preparation: "",
+  };
+  const [formData, setFormData] = useState(initialForm);
+  //handle changes in the form and updates the form data
+  const handleChange = ({ target }) => {
+    setFormData({ ...formData, [target.name]: target.value });
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    createRecipe(formData);
+    setFormData(initialForm);
+  };
   // TODO: When the form is submitted, a new recipe should be created, and the form contents cleared.
   // TODO: Add the required input and textarea form elements.
   // TODO: Add the required submit and change handlers
-  
   return (
     <form name="create" onSubmit={handleSubmit}>
       <table>

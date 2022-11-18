@@ -1,14 +1,23 @@
 import React from "react";
-import RecipeView from "./RecipeView"; //import recipeView component to be used to generate each recipe component in the table 
+import RecipeView from "./RecipeView"; //import recipeView component to be used to generate each recipe component in the table
+import EditView from "./editView";
 
-function RecipeList({recipes,handleDelete}) {
-  
-  // TODO: Display the list of recipes using the structure of table that is provided.
-  // TODO: Create at least one additional component that is used by this component.
-  // TODO: Each recipe row must have a delete button - <button name="delete">Delete</button> - that deletes the post when clicked
-  
+function RecipeList({ recipes, handleDelete, handleEdit, editRecipeIdx,handleEditChange,editFormData, handleSave,handleCancel}) {
   //use map on recipes to get all recipe components for each recipe and assign to variable
-  const list = recipes.map((recipe,index)=>(<RecipeView key={index} recipe={recipe} handleDelete={handleDelete} index={index}/>))
+  //if edit button was clicked then the recipe component that has the same index as the one that was clicked goes into the edit view
+  const viewList = recipes.map((recipe, index) => {
+    return editRecipeIdx === index ? (
+      <EditView key={index} handleEditChange={handleEditChange} editFormData={editFormData} handleSave={handleSave} handleCancel={handleCancel}/>
+    ) : (
+      <RecipeView
+        key={index}
+        recipe={recipe}
+        handleDelete={handleDelete}
+        index={index}
+        handleEdit={handleEdit}
+      />
+    );
+  });
 
   return (
     <div className="recipe-list">
@@ -23,9 +32,7 @@ function RecipeList({recipes,handleDelete}) {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
-          {list}
-        </tbody>
+        <tbody>{viewList}</tbody>
       </table>
     </div>
   );
